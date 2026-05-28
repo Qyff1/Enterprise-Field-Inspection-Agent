@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业外勤核验智能Agent</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- ====== 左侧边栏 ====== -->
+    <aside class="sidebar">
+        <div class="sidebar-header">外勤核验 Agent 控制面板</div>
+
+        <!-- 选项卡按钮 -->
+        <div class="sidebar-tabs">
+            <button class="sidebar-tab active" data-panel="tools-panel">工具</button>
+            <button class="sidebar-tab" data-panel="mcp-panel">MCP 服务</button>
+            <button class="sidebar-tab" data-panel="skills-panel">Skills</button>
+            <button class="sidebar-tab" data-panel="knowledge-panel">知识库</button>
+            <button class="sidebar-tab" data-panel="model-panel">模型</button>
+        </div>
+
+        <!-- 面板内容区 -->
+        <div class="sidebar-panels">
+            <!-- 工具面板 -->
+            <div class="sidebar-panel active" id="tools-panel">
+                <div id="tools-list"></div>
+            </div>
+            <!-- MCP 服务面板 -->
+            <div class="sidebar-panel" id="mcp-panel">
+                <div id="mcp-list"></div>
+            </div>
+            <!-- Skills 面板 -->
+            <div class="sidebar-panel" id="skills-panel">
+                <div id="skills-list"></div>
+            </div>
+            <!-- 知识库面板 -->
+            <div class="sidebar-panel" id="knowledge-panel">
+                <div id="knowledge-list"></div>
+            </div>
+            <!-- 模型信息面板 -->
+            <div class="sidebar-panel" id="model-panel">
+                <div id="model-info"></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ====== 右侧主聊天区 ====== -->
+    <main class="main-area">
+        <div class="chat-header">
+            <div class="title">企业外勤核验 <span>智能Agent</span></div>
+            <div class="actions">
+                <button class="btn primary" onclick="quickAudit()" title="一键启动外勤核验流程">🔍 外勤核验</button>
+                <button class="btn" onclick="saveConversation()" title="保存当前对话到记忆">💾 保存对话</button>
+                <button class="btn danger" onclick="clearSession()" title="清空当前会话">清空会话</button>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="messages">
+            <div class="welcome-message" id="welcome">
+                <div class="welcome-icon">🔍</div>
+                <div class="welcome-text">
+                    <strong>外勤行程核验审计助手</strong><br>
+                    上传外勤/出差报告文件（.docx/.xlsx），我将自动完成：<br>
+                    1️⃣ 文档结构化解析 2️⃣ 地理里程核验 3️⃣ 异常智能检测 4️⃣ 审计报告生成<br>
+                    <small>输入"审核这份外勤报告"或点击右上角【外勤核验】开始</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- 工具状态栏 -->
+        <div class="tool-status-bar" id="toolStatus">
+            <span class="status-dot"></span>
+            <span id="toolStatusText">Agent 正在思考...</span>
+        </div>
+
+        <!-- 文件预览区 -->
+        <div class="file-preview-area" id="filePreview"></div>
+
+        <!-- 拖拽覆盖层 -->
+        <div class="drop-overlay" id="dropOverlay">
+            <div class="drop-icon">📁</div>
+            <div class="drop-text">释放文件以上传</div>
+            <div class="drop-hint">支持图片、文档、代码等文件类型</div>
+        </div>
+
+        <div class="chat-input-area">
+            <form class="chat-input-form" onsubmit="sendMessage(event)">
+                <button type="button" class="attach-btn" id="attachBtn" title="选择文件">📎</button>
+                <input type="text" id="messageInput" placeholder="输入消息，Enter 发送...  支持拖拽文件到聊天区" autocomplete="off" />
+                <button type="submit" class="send-btn" id="sendBtn">发送</button>
+            </form>
+            <input type="file" id="fileInput" style="display:none" multiple onchange="handleFileSelect(event)" />
+        </div>
+    </main>
+
+    <!-- axios CDN（用于 HTTP 请求） -->
+    <script src="https://unpkg.com/axios@1.6.0/dist/axios.min.js"></script>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

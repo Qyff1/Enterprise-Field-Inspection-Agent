@@ -1,0 +1,28 @@
+# 密钥（含真实 API Key，禁止提交）
+.env
+
+# 运行时数据
+storage/
+
+# 对话记忆（含用户隐私数据，禁止提交）
+data/memory.md
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.log
+
+# IDE
+.idea/
+.vscode/
+.claude/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
